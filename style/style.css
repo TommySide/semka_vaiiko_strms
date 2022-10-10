@@ -1,3 +1,7 @@
+body {
+    padding-bottom: 70px;
+}
+
 nav {
     background-color: #242629;
 }
@@ -34,13 +38,34 @@ ul li a:hover {
 
 footer {
     text-align: center;
-    padding: 5em;
+    padding: 2.5em;
     background: #242629;
     color: #B1B1B1;
 }
 footer a {
     color: #fff;
 }
+
 footer a:hover {
     color: #fff;
+}
+
+.iconsfooter{
+    transition: 0.5s ease-out;
+    margin: 0em 0.5em 1em 0em;
+}
+
+.yt:hover{
+    transform: scale(1.5);
+    color: red;
+}
+
+.steam:hover{
+    transform: scale(1.5);
+    color: black;
+}
+
+.fb:hover{
+    transform: scale(1.5);
+    color: #3b5998;
 }

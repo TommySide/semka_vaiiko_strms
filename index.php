@@ -5,15 +5,13 @@
     <title>Strms | Home</title>
 </head>
 <body>
-    <header>
-        <?php include_once "header.html"; ?>
-    </header>
+<?php include_once "header.html"; ?>
+
+<br><br><br><br><br><br><br>
 
 
 
-
-
-    <?php include_once "footer.html"; ?>
+<?php include_once "footer.html"; ?>
 
 </body>
 </html>
