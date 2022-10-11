@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <section class="telo">
         <div class="row">
-            <div class="col-3 text-center bg-danger">
+            <div class="col-sm-3 text-center bg-danger">
                 <img class="img-thumbnail picture" src="images/questionmark.jpg" alt="Profile picture">
 
                 <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi dicta in quidem quo sint.</h3>
@@ -33,8 +33,10 @@
                     <a href=""><i class="fa-brands fa-twitter fa-2x"></i></a>
                 </section>
             </div>
-            <div class="col-9 text-center bg-success">
-
+            <div class="col-sm-9 text-center bg-success">
+                <div class="">
+                    <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aspernatur, assumenda beatae cupiditate distinctio, doloribus dolorum, itaque nisi perspiciatis porro sunt velit! Aut incidunt, molestias.</h1>
+                </div>
             </div>
         </div>
     </section>
