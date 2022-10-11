@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Strms | Home</title>
-    <link rel="stylesheet" href="style/styled.css">
+    <link rel="stylesheet" href="style/stylef.css">
     <script src="https://kit.fontawesome.com/85a6d0cbbe.js" crossorigin="anonymous"></script>
 </head>
 <?php include_once "header.html"; ?>
@@ -108,7 +108,42 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
