@@ -9,9 +9,9 @@
 <?php include_once "header.html"; ?>
 <body>
 <div class="container-fluid">
-    <section class="telo">
+    <section class="telo text-white">
         <div class="row">
-            <div class="col-sm-3 text-center bg-danger">
+            <div class="col-xl text-center">
                 <img class="img-thumbnail picture" src="images/questionmark.jpg" alt="Profile picture">
 
                 <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi dicta in quidem quo sint.</h4>
@@ -34,19 +34,81 @@
                 </section>
             </div>
 
-            <div class="col-sm-9 text-center bg-success main-karty">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+            <div class="col col-xl-9 text-center main-karty">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
                     <div class="col mb-4">
                         <div class="card">
-                            <img src="images/questionmark.jpg" class="card-img-top" alt="...">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
                             <div class="card-body">
                                 <h5 class="card-title titulok">Titulok karty</h5>
                                 <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
-                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i></p>
-                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i></p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
                             </div>
                         </div>
                     </div>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i> </p>
+                                <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> 15</i></p>
+                                <button class="btn btn-primary">Zakupit</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
