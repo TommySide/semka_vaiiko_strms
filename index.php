@@ -35,6 +35,7 @@
             </div>
 
             <div class="col col-xl-9 text-center main-karty">
+                <h1 class="text-start">STRMS store</h1>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
                     <div class="col mb-4">
                         <div class="card">
