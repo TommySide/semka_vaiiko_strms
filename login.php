@@ -17,7 +17,7 @@
                     <input type="text" class="text-white" placeholder="prihlásovacie meno"/>
                     <input type="password" class="text-white" placeholder="heslo"/>
                     <button name="login-submit">prihlasit</button>
-                    <p class="message">Nie si registrovaný? <a href="#">Vytvor si účet</a></p>
+                    <p class="message">Nie si registrovaný? <a href="register.php">Vytvor si účet</a></p>
                     <p class="message">Zabudnuté heslo? <a href="#">Zmeň si ho tu</a></p>
                 </form>
             </div>
