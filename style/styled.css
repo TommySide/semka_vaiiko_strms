@@ -91,10 +91,11 @@ footer a:hover {
 }
 .icons a i {
     color: grey;
-    transition: color 0.5s;
+    transition: transform 0.5s;
 }
 .icons a i:hover {
     color: white;
+    transform: scale(1.25);
 }
 .main-karty {
     padding-top: 0.5em;
