@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <title>Strms | Home</title>
 </head>
-<body>
 <?php include_once "header.html"; ?>
+<body>
 
-<br><br><br><br><br><br><br>
+<h1 class="text-center">content bla bla bla</h1>
 
-
-
-<?php include_once "footer.html"; ?>
 
 </body>
+<?php include_once "footer.html"; ?>
 </html>

@@ -5,6 +5,7 @@ body {
 nav {
     background-color: #242629;
 }
+
 ul li a{
     color: #B1B1B1;
     text-decoration: none;
@@ -22,17 +23,9 @@ ul li a:hover {
     color: white;
 }
 
-.navbar-toggler-icon {
-    color: white !important;
-}
-
-.nav_left {
-    text-align: right !important;
-}
-
 .logo {
     font-weight: bold;
-    font-family: "Bodoni MT";
+    font-family: Georgia, serif;
     line-height: 35px;
 }
 
@@ -42,6 +35,7 @@ footer {
     background: #242629;
     color: #B1B1B1;
 }
+
 footer a {
     color: #fff;
 }
@@ -51,8 +45,10 @@ footer a:hover {
 }
 
 .iconsfooter{
-    transition: 0.5s ease-out;
-    margin: 0em 0.5em 1em 0em;
+    margin: 0 0.5em 0;
+}
+.iconsfooter:hover {
+    transition: transform 0.5s ease-in-out;
 }
 
 .yt:hover{
