@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Strms | Home</title>
-    <link rel="stylesheet" href="style/styleb.css">
+    <link rel="stylesheet" href="style/styled.css">
     <script src="https://kit.fontawesome.com/85a6d0cbbe.js" crossorigin="anonymous"></script>
 </head>
 <?php include_once "header.html"; ?>
@@ -14,8 +14,8 @@
             <div class="col-sm-3 text-center bg-danger">
                 <img class="img-thumbnail picture" src="images/questionmark.jpg" alt="Profile picture">
 
-                <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi dicta in quidem quo sint.</h3>
-                <h4 class="text-secondary">Lorem ipsum dolor sit amet.</h4>
+                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi dicta in quidem quo sint.</h4>
+                <h5 class="text-secondary">Lorem ipsum dolor sit amet.</h5>
 
                 <section class="info text-start">
                     <div><i class="fa-solid fa-clock"></i> Lorem ipsum dolor sit amet.</div>
@@ -24,18 +24,29 @@
                     <div><i class="fa-solid fa-heart"></i> Lorem ipsum dolor sit amet.</div>
                 </section>
                 <section class="icons">
-                    <a href=""><i class="fa-solid fa-globe fa-2x"></i></a>
-                    <a href=""><i class="fa-brands fa-facebook fa-2x"></i></a>
-                    <a href=""><i class="fa-brands fa-discord fa-2x"></i></a>
-                    <a href=""><i class="fa-brands fa-youtube fa-2x"></i></a>
-                    <a href=""><i class="fa-brands fa-square-instagram fa-2x"></i></a>
-                    <a href=""><i class="fa-brands fa-telegram fa-2x"></i></a>
-                    <a href=""><i class="fa-brands fa-twitter fa-2x"></i></a>
+                    <a href="#"><i class="fa-solid fa-globe fa-2x"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook fa-2x"></i></a>
+                    <a href="#"><i class="fa-brands fa-discord fa-2x"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube fa-2x"></i></a>
+                    <a href="#"><i class="fa-brands fa-square-instagram fa-2x"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram fa-2x"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter fa-2x"></i></a>
                 </section>
             </div>
-            <div class="col-sm-9 text-center bg-success">
-                <div class="">
-                    <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aspernatur, assumenda beatae cupiditate distinctio, doloribus dolorum, itaque nisi perspiciatis porro sunt velit! Aut incidunt, molestias.</h1>
+
+            <div class="col-sm-9 text-center bg-success main-karty">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="images/questionmark.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title titulok">Titulok karty</h5>
+                                <p class="card-text text-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, dicta dolores eos expedita fugiat odit!</p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i></p>
+                                <p class="card-text text-start"><i class="fa-solid fa-coins"> 100000</i></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
