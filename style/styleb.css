@@ -65,3 +65,32 @@ footer a:hover {
     transform: scale(1.5);
     color: #3b5998;
 }
+
+.telo {
+    padding-bottom: 3em !important;
+    padding-top: 3em !important;
+}
+
+.picture {
+    margin: 1em;
+    max-width: 50% !important;
+    height: auto;
+}
+
+.info {
+    padding: 1.5em;
+    margin: 0.5em;
+    border: 1px solid black;
+}
+.icons {
+    padding-bottom: 1em;
+    width: auto;
+    text-decoration: none;
+}
+.icons i {
+    margin: 0 0.25em;
+}
+.icons a i {
+    color: black;
+}
+
