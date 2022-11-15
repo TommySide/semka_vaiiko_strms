@@ -11,19 +11,26 @@
 <body>
 
 <?php
-
     if (isset($_GET["user"])) {
         if (!is_numeric($_GET["user"])) {
             echo "<h1 class='text-center text-danger' style='margin-top: 1em;'>This streamer doesn't exist!</h1>";
             exit();
         }
 
-        include "classes/Streamer.php";
-        $streamer = new Streamer($_GET["user"]);
-        $streamer->loadStreamer();
+        include "classes/StreamerContr.class.php";
+        /** @var Streamer $streamer */
+        /** @var StreamerContr $streamerContr */
+        $streamerContr = new StreamerContr($_GET["user"]);
+        $streamer = $streamerContr->loadStreamer()[0];
     } else {
         header("Location: index.php?error=enterstreamer");
         exit();
+    }
+
+    if (isset($_POST["body"])) {
+        $kolko = $_POST["kolko"];
+        $komu = $_POST["komu"];
+        $streamerContr->pridajBody($kolko, $komu);
     }
 ?>
 <div class="container-fluid">
@@ -32,12 +39,12 @@
             <div class="col-xl text-center">
                 <img class="img-thumbnail picture" src="images/questionmark.jpg" alt="Profile picture">
 
-                <h4><?php echo $streamer->getPopis(); ?></h4>
-                <h5 class="text-secondary"><?php echo $streamer->getSmallpopis(); ?></h5>
+                <h4><?php echo $streamer->popis; ?></h4>
+                <h5 class="text-secondary"><?php echo $streamer->smallpopis; ?></h5>
 
                 <section class="info text-start">
                     <?php if (isset($_SESSION["nickname"])) { ?>
-                        <div><i class="fa-solid fa-coins"></i> You currently have <?php echo $streamer->getPoints(); ?> points</div>
+                        <div><i class="fa-solid fa-coins"></i> You currently have <?php echo $streamerContr->getPoints(); ?> points</div>
                         <div><i class="fa-solid fa-globe"></i> Your rank will be here.</div>
                         <div><i class="fa-solid fa-heart"></i> You can receive 1 point for each minute watched.</div>
                     <?php } else { ?>
@@ -48,20 +55,20 @@
 
                 </section>
                 <section class="icons">
-                    <a href="#"><i class="fa-solid fa-globe fa-2x"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook fa-2x"></i></a>
-                    <a href="#"><i class="fa-brands fa-discord fa-2x"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube fa-2x"></i></a>
-                    <a href="#"><i class="fa-brands fa-square-instagram fa-2x"></i></a>
-                    <a href="#"><i class="fa-brands fa-telegram fa-2x"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter fa-2x"></i></a>
+                    <a href="<?php echo $streamer->www ?>"><i class="fa-solid fa-globe fa-2x"></i></a>
+                    <a href="<?php echo $streamer->fb ?>"><i class="fa-brands fa-facebook fa-2x"></i></a>
+                    <a href="<?php echo $streamer->discord ?>"><i class="fa-brands fa-discord fa-2x"></i></a>
+                    <a href="<?php echo $streamer->youtube ?>"><i class="fa-brands fa-youtube fa-2x"></i></a>
+                    <a href="<?php echo $streamer->instagram ?>"><i class="fa-brands fa-square-instagram fa-2x"></i></a>
+                    <a href="<?php echo $streamer->telegram ?>"><i class="fa-brands fa-telegram fa-2x"></i></a>
+                    <a href="<?php echo $streamer->twitter ?>"><i class="fa-brands fa-twitter fa-2x"></i></a>
                 </section>
 
-                <?php if (isset($_SESSION["uId"]) && $streamer->isManagement()) { ?>
+                <?php if (isset($_SESSION["uId"]) && $streamerContr->isManagement()) { ?>
                     <div class="form-group">
-                        <form action="add.php" method="post">
-                            <input type="text" class="form-control" placeholder="Komu pridat body">
-                            <input type="number" class="form-control" placeholder="Kolko bodov pridat">
+                        <form action="" method="post">
+                            <input type="text" class="form-control" name="komu" placeholder="Komu pridat body">
+                            <input type="number" class="form-control" name="kolko" placeholder="Kolko bodov pridat">
                             <button class="btn btn-primary" name="body">Pridaj body</button>
                         </form>
                     </div>
@@ -69,7 +76,7 @@
             </div>
 
             <div class="col col-xl-9 text-center main-karty">
-                <h1 class="text-start"> <?php echo $streamer->getName(); ?> store</h1>
+                <h1 class="text-start"> <?php echo $streamer->name; ?> store</h1>
                 <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
                     <?php
                     if (isset($_GET["error"])) {
@@ -78,7 +85,8 @@
                             exit();
                         }
                     }
-                    $products = $streamer->getProducts();
+                    /** @var Product $product */
+                    $products = $streamerContr->getProducts();
 
                     foreach ($products as $product) { ?>
                         <div class="col mb-4">

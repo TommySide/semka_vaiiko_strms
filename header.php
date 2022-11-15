@@ -20,12 +20,6 @@
                         <li class="">
                             <a class="" href="index.php">Home</a>
                         </li>
-                        <li class="">
-                            <a class="" href="#">About</a>
-                        </li>
-                        <li class="">
-                            <a class="" href="#">Contant us</a>
-                        </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <?php if (!isset($_SESSION["nickname"])) {?>
@@ -35,7 +29,6 @@
                             <li><a href="profile.php?user=<?php echo $_SESSION['uId']; ?>"><?php echo $_SESSION["nickname"]; ?></a></li>
                             <li><a href="includes/logout.inc.php">Logout</a></li>
                         <?php } ?>
-
                     </ul>
                 </div>
             </div>
