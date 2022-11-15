@@ -8,7 +8,7 @@
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
+<?php session_start(); ?>
     <header id="header">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
@@ -29,8 +29,14 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        <li><a href="../strm/login.php">Login</a></li>
-                        <li><a href="../strm/signup.php">Register</a></li>
+                        <?php if (!isset($_SESSION["nickname"])) {?>
+                            <li><a href="login.php">Login</a></li>
+                            <li><a href="signup.php">Register</a></li>
+                        <?php } else { ?>
+                            <li><a href="profile.php"><?php echo $_SESSION["nickname"]; ?></a></li>
+                            <li><a href="includes/logout.inc.php">Logout</a></li>
+                        <?php } ?>
+
                     </ul>
                 </div>
             </div>

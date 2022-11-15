@@ -20,6 +20,10 @@ class LoginContr extends Login
             header("Location: ../signup.php?error=emptyfields");
             exit();
         }
+        if (!$this->invalidNickname()) {
+            header("Location: ../signup.php?error=invalidnickname");
+            exit();
+        }
 
         $this->getUser($this->nickname, $this->password);
     }
@@ -32,7 +36,7 @@ class LoginContr extends Login
     }
 
     private function invalidNickname() {
-        if (!preg_match("/[A-Za-z0-9]+/", $this->nickname)) {
+        if (!preg_match("/^[a-zA-Z0-9]*$/", $this->nickname)) {
             return false;
         }
         return true;
