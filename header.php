@@ -30,7 +30,7 @@
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li><a href="login.php">Login</a></li>
-                        <li><a href="register.php">Register</a></li>
+                        <li><a href="signup.php">Register</a></li>
                     </ul>
                 </div>
             </div>

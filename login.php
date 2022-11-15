@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style/signupforms.css">
     <link rel="stylesheet" href="style/stylef.css">
 </head>
-    <?php include_once "header.html"; ?>
+    <?php include_once "header.php"; ?>
 <body>
     <div class="container-fluid">
         <div class="login-page">
@@ -17,7 +17,7 @@
                     <input type="text" class="text-white" placeholder="prihlásovacie meno"/>
                     <input type="password" class="text-white" placeholder="heslo"/>
                     <button name="login-submit">prihlasit</button>
-                    <p class="message">Nie si registrovaný? <a href="register.php">Vytvor si účet</a></p>
+                    <p class="message">Nie si registrovaný? <a href="signup.php">Vytvor si účet</a></p>
                     <p class="message">Zabudnuté heslo? <a href="#">Zmeň si ho tu</a></p>
                 </form>
             </div>

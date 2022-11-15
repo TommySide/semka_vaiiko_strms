@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style/stylef.css">
     <script src="https://kit.fontawesome.com/85a6d0cbbe.js" crossorigin="anonymous"></script>
 </head>
-<?php include_once "header.html"; ?>
+<?php include_once "header.php"; ?>
 <body>
 <div class="container-fluid">
     <section class="telo text-white">
@@ -155,5 +155,5 @@
 
 
 </body>
-<?php include_once "footer.html"; ?>
+<?php include_once "footer.php"; ?>
 </html>
