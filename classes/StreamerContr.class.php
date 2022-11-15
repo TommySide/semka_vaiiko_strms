@@ -163,7 +163,13 @@ class StreamerContr extends Dbh
         $sql = "DELETE FROM produkty WHERE id_produkt=?;";
         $stmt = $this->connect()->prepare($sql);
 
-        if (!$stmt)
+        if (!$stmt->execute([$id_prod])) {
+            $stmt = null;
+            header("Location: store.php?user=" . $this->id . "&error=stmtfail");
+            exit();
+        }
+        header("Location: store.php?user=" . $this->id . "&success=deleted&id=".$id_prod);
+        exit();
     }
 
 }

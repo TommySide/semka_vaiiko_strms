@@ -110,7 +110,7 @@
 
 
                                         <form action="" method="post">
-                                            <input type="hidden" value="<?php echo $product->id_produkt; ?>">
+                                            <input type="hidden" name="id" value="<?php echo $product->id_produkt; ?>">
                                             <button class="btn btn-primary">Zakupit</button>
                                             <?php if (isset($_SESSION["uId"]) && $streamerContr->isManagement()) { ?>
                                                 <button class="btn btn-danger" name="delete" onclick="return confirm('Are you sure you want to delete?')">Vymazat</button>
