@@ -143,4 +143,27 @@ class StreamerContr extends Dbh
         exit();
     }
 
+    public function pridajProdukt($produkt) {
+        $sql = "INSERT INTO produkty (titul, popis, cena, pocet, id_streamer)
+                VALUES (?,?,?,?,?);";
+        $stmt = $this->connect()->prepare($sql);
+
+        /** @var Product $produkt */
+        if ($stmt->execute([$produkt->titul, $produkt->popis, $produkt->cena, $produkt->pocet, $this->id])) {
+            $stmt = null;
+            header("Location: store.php?user=" . $this->id . "&error=stmtfail");
+            exit();
+        }
+
+        header("Location: store.php?user=" . $this->id . "&success=added");
+        exit();
+    }
+
+    public function vymazProdukt(mixed $id_prod) {
+        $sql = "DELETE FROM produkty WHERE id_produkt=?;";
+        $stmt = $this->connect()->prepare($sql);
+
+        if (!$stmt)
+    }
+
 }
