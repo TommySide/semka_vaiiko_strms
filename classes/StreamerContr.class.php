@@ -94,4 +94,53 @@ class StreamerContr extends Dbh
         exit();
     }
 
+    public function vytvorStreamProfil($array) {
+        if (empty($array[0]) || empty($array[1]) || empty($array[2])) {
+            header("Location: store.php?user=" . $this->id . "&error=emptyfields");
+            exit();
+        }
+
+        $sql = "INSERT INTO streamer (name, popis, smallpopis, www, fb, discord, youtube, instagram, telegram, twitter)
+                VALUES (?,?,?,?,?,?,?,?,?,?);";
+        $stmt = $this->connect()->prepare($sql);
+        print_r($array);
+        if (!$stmt->execute($array)) {
+            $stmt = null;
+            header("Location: store.php?user=" . $this->id . "&error=stmtfail");
+            exit();
+        }
+
+        $sql = "SELECT id_streamer name FROM streamer WHERE name=?;";
+        $stmt = $this->connect()->prepare($sql);
+
+        if (!$stmt->execute([$array[0]])) {
+            $stmt = null;
+            header("Location: store.php?user=" . $this->id . "&error=stmtfail");
+            exit();
+        }
+        $id_strm = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["name"];
+
+        $sql = "INSERT INTO managestreamer (id_streamer, id_user, permission)
+                VALUES (?,?,?)";
+        $stmt = $this->connect()->prepare($sql);
+
+        if (!$stmt->execute([$id_strm, $_SESSION["uId"], 10])) {
+            $stmt = null;
+            header("Location: store.php?user=" . $this->id . "&error=stmtfail");
+            exit();
+        }
+
+        $sql = "UPDATE users SET hasStore=1;";
+        $stmt = $this->connect()->prepare($sql);
+
+        if (!$stmt->execute()) {
+            $stmt = null;
+            header("Location: store.php?user=" . $this->id . "&error=stmtfail");
+            exit();
+        }
+
+        header("Location: profile.php?success=storecreated");
+        exit();
+    }
+
 }

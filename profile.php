@@ -29,7 +29,12 @@
             <h2 class="text-center text-white font-weight-bold" style="letter-spacing: 3px">Profile | <?php echo $_SESSION["nickname"]."#".$_SESSION["uId"]; ?></h2>
             <br>
                 <a href="pwd_change.php"><button name="pwd">Zmena hesla</button></a>
-                <a href="create.php"><button>create streamer profile</button></a>
+            <?php if ($_SESSION["hasStore"] == 0) { ?>
+                <form action="create.php" method="post">
+                    <button name="create">create streamer profile</button>
+                </form>
+                <?php } ?>
+
         </div>
     </div>
 </div>

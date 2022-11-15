@@ -66,6 +66,11 @@
 
                 <?php if (isset($_SESSION["uId"]) && $streamerContr->isManagement()) { ?>
                     <div class="form-group">
+                        <form action="manage.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $streamer->id_streamer; ?>">
+                            <button class="btn btn-primary" name="pridaj">Pridaj produkt</button>
+                        </form>
+                        <br>
                         <form action="" method="post">
                             <input type="text" class="form-control" name="komu" placeholder="Komu pridat body">
                             <input type="number" class="form-control" name="kolko" placeholder="Kolko bodov pridat">

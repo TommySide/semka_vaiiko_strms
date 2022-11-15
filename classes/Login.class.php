@@ -3,7 +3,7 @@
 class Login extends Dbh
 {
     protected function getUser($nickname, $password) {
-        $sql = "SELECT id_users, nickname, password FROM users WHERE nickname=? OR email=?";
+        $sql = "SELECT id_users, nickname, password, hasStore FROM users WHERE nickname=? OR email=?";
         $stmt = $this->connect()->prepare($sql);
 
         if (!$stmt->execute([$nickname, $nickname])) {
@@ -27,6 +27,7 @@ class Login extends Dbh
         session_start();
         $_SESSION["uId"] = $result[0]["id_users"];
         $_SESSION["nickname"] = $result[0]["nickname"];
+        $_SESSION["hasStore"] = $result[0]["hasStore"];
 
         $stmt = null;
     }
