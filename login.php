@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="style/signupforms.css">
-    <link rel="stylesheet" href="style/stylef.css">
+    <link rel="stylesheet" href="style/stylegg.css">
 </head>
     <?php include_once "header.php"; ?>
 <body>
