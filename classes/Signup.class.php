@@ -1,6 +1,6 @@
 <?php
 
-class Signup extends dbh
+class Signup extends Dbh
 {
     protected function setUser($nickname, $pwd, $email) {
         $sql = "INSERT INTO users (nickname, password, email) VALUES (?,?,?);";

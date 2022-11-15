@@ -1,9 +1,9 @@
 <?php
 
-class Login extends dbh
+class Login extends Dbh
 {
     protected function getUser($nickname, $password) {
-        $sql = "SELECT id, nickname, password FROM users WHERE nickname=? OR email=?";
+        $sql = "SELECT id_users, nickname, password FROM users WHERE nickname=? OR email=?";
         $stmt = $this->connect()->prepare($sql);
 
         if (!$stmt->execute([$nickname, $nickname])) {
@@ -19,13 +19,13 @@ class Login extends dbh
         }
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        print_r($result);
+
         if (!password_verify($password, $result[0]["password"])) {
             header("Location: ../login.php?error=wrongpwd");
             exit();
         }
         session_start();
-        $_SESSION["uId"] = $result[0]["id"];
+        $_SESSION["uId"] = $result[0]["id_users"];
         $_SESSION["nickname"] = $result[0]["nickname"];
 
         $stmt = null;

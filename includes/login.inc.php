@@ -10,5 +10,5 @@ if (isset($_POST["login-submit"])) {
     $signup = new LoginContr($nick, $pwd);
     $signup->loginUser();
 
-    header("Location: ../index.php?error=none");
+    header("Location: ../index.php?success=login");
 }

@@ -32,7 +32,7 @@
                             <li><a href="login.php">Login</a></li>
                             <li><a href="signup.php">Register</a></li>
                         <?php } else { ?>
-                            <li><a href="profile.php"><?php echo $_SESSION["nickname"]; ?></a></li>
+                            <li><a href="profile.php?user=<?php echo $_SESSION['uId']; ?>"><?php echo $_SESSION["nickname"]; ?></a></li>
                             <li><a href="includes/logout.inc.php">Logout</a></li>
                         <?php } ?>
 
