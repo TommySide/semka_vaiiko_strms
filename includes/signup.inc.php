@@ -4,10 +4,13 @@ if (isset($_POST["login-submit"])) {
     $nick = $_POST["nickname"];
     $email = $_POST["email"];
     $pwd = $_POST["password"];
-    $pwdrep = $_POST["password-rep"];
+    $pwdRep = $_POST["password-rep"];
 
+    include "../classes/dbh.class.php";
     include "../classes/Signup.class.php";
-    include "../classes/signup_contr.class.php";
-    $signup = new SignupContr($nick, $email, $pwd, $pwdrep);
+    include "../classes/SignupContr.class.php";
+    $signup = new SignupContr($nick, $email, $pwd, $pwdRep);
+    $signup->signupUser();
 
+    header("Location: ../index.php?error=none");
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Strms | Home</title>
-    <link rel="stylesheet" href="style/stylef.css">
+    <link rel="stylesheet" href="style/stylegg.css">
     <script src="https://kit.fontawesome.com/85a6d0cbbe.js" crossorigin="anonymous"></script>
 </head>
 <?php include_once "header.php"; ?>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Strms</title>
-    <link rel="stylesheet" href="style/stylef.css">
+    <link rel="stylesheet" href="style/stylegg.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
@@ -29,8 +29,8 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="signup.php">Register</a></li>
+                        <li><a href="../strm/login.php">Login</a></li>
+                        <li><a href="../strm/signup.php">Register</a></li>
                     </ul>
                 </div>
             </div>

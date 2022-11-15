@@ -1,11 +1,11 @@
 <?php
 
-class SignupContr
+class SignupContr extends Signup
 {
     private $nickname;
     private $email;
     private $password;
-    private $passwordrep;
+    private $passwordRep;
 
     /**
      * @param $nickname
@@ -18,18 +18,43 @@ class SignupContr
         $this->nickname = $nickname;
         $this->email = $email;
         $this->password = $password;
-        $this->passwordrep = $passwordrep;
+        $this->passwordRep = $passwordrep;
+    }
+
+    public function signupUser() {
+        if (!$this->emptyField()) {
+            header("Location: ../signup.php?error=emptyfields");
+            exit();
+        }
+        if (!$this->invalidNickname()) {
+            header("Location: ../signup.php?error=nickname");
+            exit();
+        }
+        if (!$this->invalidEmail()) {
+            header("Location: ../signup.php?error=email");
+            exit();
+        }
+        if (!$this->pwdMatch()) {
+            header("Location: ../signup.php?error=pwdmatch");
+            exit();
+        }
+        if (!$this->nicknameTaken()) {
+            header("Location: ../signup.php?error=useroremailtaken");
+            exit();
+        }
+
+        $this->setUser($this->nickname, $this->password, $this->email);
     }
 
     private function emptyField() {
-        if (empty($this->nickname) || empty($this->email) || empty($this->password) || empty($this->passwordrep)) {
+        if (empty($this->nickname) || empty($this->email) || empty($this->password) || empty($this->passwordRep)) {
             return false;
         }
         return true;
     }
 
     private function invalidNickname() {
-        if (!preg_match("\^[a-zA-Z0-9]*$/", $this->nickname)) {
+        if (!preg_match("/^[a-zA-Z0-9]*$/", $this->nickname)) {
             return false;
         }
         return true;
@@ -42,10 +67,18 @@ class SignupContr
         return true;
     }
 
-    private function pwdDontMatch() {
-        if ($this->password !== $this->passwordrep) {
+    private function pwdMatch() {
+        if ($this->password !== $this->passwordRep) {
             return false;
         }
         return true;
     }
+
+    private function nicknameTaken() {
+        if (!$this->checkUser($this->nickname, $this->email)) {
+            return false;
+        }
+        return true;
+    }
+
 }
