@@ -17,5 +17,4 @@
       <p>Copyright &copy; 2022 <a href="#" target="_blank">TommY</a>. All rights reserved.</p>
     </div>
 </footer>
-</body>
 </html>
