@@ -18,7 +18,7 @@ class Dbh
     }
 
     public function getAllStreamers() {
-        $sql = "SELECT * FROM streamer ORDER BY id_streamer";
+        $sql = "SELECT * FROM streamer ORDER BY id_streamer ASC";
         $stmt = $this->connect()->prepare($sql);
         if (!$stmt->execute()) {
             header("Location: index.php?error=stmtfail");

@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="style/stylegg.css">
-    <script src="https://kit.fontawesome.com/85a6d0cbbe.js" crossorigin="anonymous"></script>
-</head>
 <footer>
-  <div></div>
     <div class="footer-bottom">
         <div class="footer-social">
             <a href="" target="_blank" data-toggle="tooltip" title="facebook"><i class="fab fa-facebook iconsfooter fb"></i></a>
@@ -17,4 +8,3 @@
       <p>Copyright &copy; 2022 <a href="#" target="_blank">TommY</a>. All rights reserved.</p>
     </div>
 </footer>
-</html>

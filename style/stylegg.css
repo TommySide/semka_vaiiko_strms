@@ -117,3 +117,7 @@ footer a:hover {
 .card-body button {
     border-radius: 15px;
 }
+.noa {
+    text-decoration: none !important;
+    outline: none !important;
+}
