@@ -36,14 +36,13 @@ class StreamerContr extends Dbh
 
         if (!$stmt->execute([$this->id])) {
             $stmt = null;
-            header("Location: ../index.php?error=stmtfailed");
+            header("Location: index.php?error=stmtfailed");
             exit();
         }
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            header("Location: store.php?user=".$this->id."&error=noproducts");
-            exit();
+            return false;
         }
         return $stmt->fetchAll(PDO::FETCH_CLASS, Product::class);
     }
@@ -149,7 +148,7 @@ class StreamerContr extends Dbh
         $stmt = $this->connect()->prepare($sql);
 
         /** @var Product $produkt */
-        if ($stmt->execute([$produkt->titul, $produkt->popis, $produkt->cena, $produkt->pocet, $this->id])) {
+        if (!$stmt->execute([$produkt->titul, $produkt->popis, $produkt->cena, $produkt->pocet, $this->id])) {
             $stmt = null;
             header("Location: store.php?user=" . $this->id . "&error=stmtfail");
             exit();

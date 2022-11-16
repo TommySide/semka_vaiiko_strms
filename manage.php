@@ -26,7 +26,7 @@ if (!isset($_GET["pridaj"])) {
             header("Location: manage.php?id=".$_GET["id"]."&pridaj&error=emptyfields");
             exit();
         }
-        if (!preg_match("/^[a-zA-Z0-9#]*$/", $_POST["titul"]) || !preg_match("/^[a-zA-Z0-9#]*$/", $_POST["popis"])) {
+        if (!preg_match('/^[a-zA-Z0-9 _#]+$/', $_POST["titul"]) || !preg_match('/^[a-zA-Z0-9 _#]+$/', $_POST["popis"])) {
             header("Location: manage.php?id=".$_GET["id"]."&pridaj&error=wronginput");
             exit();
         }

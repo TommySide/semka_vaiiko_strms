@@ -70,6 +70,16 @@
                 </section>
 
                 <?php if (isset($_SESSION["uId"]) && $streamerContr->isManagement()) { ?>
+                    <?php
+                        if (isset($_GET["success"])) {
+                            if ($_GET["success"] == "added") {
+                                echo "<h4 class='text-success'>Produkt pridany.</h4>";
+                            } else if ($_GET["success"] == "pointsadded") {
+                                echo "<h4 class='text-success'>Body pridane.</h4>";
+                            }
+                        }
+                    ?>
+                    <h5 class="text-success"></h5>
                     <div class="form-group">
                         <form action="manage.php" method="get">
                             <input type="hidden" name="id" value="<?php echo $streamer->id_streamer; ?>">
@@ -89,14 +99,12 @@
                 <h1 class="text-start"> <?php echo $streamer->name; ?> store</h1>
                 <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
                     <?php
-                    if (isset($_GET["error"])) {
-                        if ($_GET["error"] == "noproducts") {
-                            echo "<h1 class='text-danger'>No products!</h1>";
-                            exit();
-                        }
-                    }
+
                     /** @var Product $product */
-                    $products = $streamerContr->getProducts();
+                    if (!($products = $streamerContr->getProducts())) {
+                        echo "<h1 class='text-danger'>No products!</h1>";
+                        exit();
+                    }
 
                     foreach ($products as $product) { ?>
                         <div class="col mb-4">

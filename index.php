@@ -23,22 +23,25 @@ $db = new Dbh();
 $streamers = $db->getAllStreamers();
 
 /** @var Streamer $streamer */
-foreach ($streamers as $streamer) { ?>
-    <a href="store.php?user=<?php echo $streamer->id_streamer; ?>">
+?>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-4" style="margin: 2em 10em;">
-            <div class="col mb-3">
-                <div class="card">
-                    <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title titulok"><?php echo $streamer->name; ?></h5>
-                        <p class="card-text text-start"><?php echo $streamer->popis; ?></p>
+        <?php foreach ($streamers as $streamer) { ?>
+            <a href="store.php?user=<?php echo $streamer->id_streamer; ?>">
+                <div class="col mb-3">
+                    <div class="card">
+                        <img src="images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title titulok"><?php echo $streamer->name; ?></h5>
+                            <p class="card-text text-start"><?php echo $streamer->popis; ?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
+        <?php } ?>
         </div>
-    </a>
 
-<?php } ?>
+
+
 
 </div>
 
