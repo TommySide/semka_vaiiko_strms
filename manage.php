@@ -5,21 +5,20 @@ if (!isset($_GET["pridaj"])) {
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style/signupforms.css">
+    <title>Strms</title>
     <link rel="stylesheet" href="style/stylegg.css">
-
-    <title>Document</title>
+    <link rel="stylesheet" href="style/signupforms.css">
+    <script src="https://kit.fontawesome.com/85a6d0cbbe.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<?php include "header.php"; ?>
-<body>
 
+<body>
+<?php include "header.php"; ?>
 <?php
     if (isset($_POST["submit"])) {
         if (empty($_POST["titul"]) || empty($_POST["popis"]) || empty($_POST["cena"]) || empty($_POST["kusy"])) {
@@ -47,7 +46,7 @@ if (!isset($_GET["pridaj"])) {
         <div class="form text-white">
             <h2 class="text-center text-white">Add product</h2>
             <br>
-            <form class="login-form" action="" method="post">
+            <form class="login-form" method="post">
                 <input type="text" name="titul" class="text-white" placeholder="Titulok produktu"/>
                 <input type="text" name="popis" class="text-white" placeholder="Popis produktu"/>
                 <input type="number" name="cena" class="text-white" placeholder="Cena produktu"/>
@@ -57,5 +56,6 @@ if (!isset($_GET["pridaj"])) {
         </div>
     </div>
 </div>
+<?php include "footer.php"; ?>
 </body>
 </html>
