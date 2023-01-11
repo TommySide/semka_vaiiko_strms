@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Streamer;
 
 /**
  * Class HomeController
@@ -28,7 +29,8 @@ class HomeController extends AControllerBase
      */
     public function index(): Response
     {
-        return $this->html();
+        $streamers = Streamer::getAll();
+        return $this->html($streamers);
     }
 
     /**

@@ -31,14 +31,22 @@ class AuthController extends AControllerBase
         $formData = $this->app->getRequest()->getPost();
         $logged = null;
         if (isset($formData['submit'])) {
-            $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
+            $logged = $this->app->getAuth()->login($formData['name'], $formData['password']);
             if ($logged) {
-                return $this->redirect('?c=admin');
+                return $this->redirect('?c=user');
             }
         }
 
         $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
         return $this->html($data);
+    }
+
+    public function register(): Response
+    {
+        $formData = $this->app->getRequest()->getPost();
+        $logged = null;
+
+        return $this->html();
     }
 
     /**
@@ -48,6 +56,6 @@ class AuthController extends AControllerBase
     public function logout(): Response
     {
         $this->app->getAuth()->logout();
-        return $this->html();
+        return $this->redirect("?c=home");
     }
 }
