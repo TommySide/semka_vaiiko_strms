@@ -6,22 +6,22 @@ use App\core\Model;
 
 class Streamer extends Model
 {
-    protected $id_streamer, $name, $popis, $smallpopis, $www, $fb, $discord, $youtube, $instagram, $telegram, $twitter;
+    protected $id, $name, $popis, $smallpopis, $www, $fb, $discord, $youtube, $instagram, $telegram, $twitter;
 
     /**
      * @return mixed
      */
-    public function getIdStreamer()
+    public function getId()
     {
-        return $this->id_streamer;
+        return $this->id;
     }
 
     /**
-     * @param mixed $id_streamer
+     * @param mixed $id
      */
-    public function setIdStreamer($id_streamer): void
+    public function setId($id): void
     {
-        $this->id_streamer = $id_streamer;
+        $this->id = $id;
     }
 
     /**

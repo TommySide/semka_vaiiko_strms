@@ -15,7 +15,7 @@ use App\Models\Streamer;
     <h3>Some of the newest content creators!</h3>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4" style="margin: 2em 10em;">
         <?php foreach ($data as $streamer) { ?>
-            <a href="?c=store&a=index&id=2" class="noa">
+            <a href="?c=store&id=<?php echo $streamer->getId(); ?>" class="noa">
                 <div class="col mb-4">
                     <div class="card">
                         <img src="public/images/questionmark.jpg" class="card-img-top img-karta" alt="">

@@ -6,22 +6,22 @@ use App\core\Model;
 
 class Product extends Model
 {
-    protected $id_product, $titul, $popis, $cena, $pocet, $id_streamer, $hidden;
+    protected $id, $titul, $popis, $cena, $pocet, $id_streamer, $hidden;
 
     /**
      * @return mixed
      */
-    public function getIdProduct()
+    public function getId()
     {
-        return $this->id_product;
+        return $this->id;
     }
 
     /**
-     * @param mixed $id_product
+     * @param mixed $id
      */
-    public function setIdProduct($id_product): void
+    public function setId($id): void
     {
-        $this->id_product = $id_product;
+        $this->id = $id;
     }
 
     /**
