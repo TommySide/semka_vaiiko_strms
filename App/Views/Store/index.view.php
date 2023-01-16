@@ -61,7 +61,7 @@ $products = $data['products'];
                     <h5 class="text-success"></h5>
                     <div class="form-group">
                         <form action="manage.php" method="get">
-                            <input type="hidden" name="id" value="<?php echo $streamer->getId(); ?>">
+                            <input type="hidden" name="id" value="<?php echo $streamer->getIdStreamer(); ?>">
                             <button class="btn btn-primary" name="pridaj">Pridaj produkt</button>
                         </form>
                         <br>
@@ -76,41 +76,39 @@ $products = $data['products'];
 
             <div class="col col-xl-9 text-center main-karty">
                 <h1 class="text-start"> <?php echo $streamer->getName(); ?> store</h1>
+                <?php if ($products != null) { ?>
                 <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
                     <?php
-
-//                    /** @var Product $product */
-//                    if (!($products = $streamerContr->getProducts())) {
-//                        echo "<h1 class='text-danger'>No products!</h1>";
-//                        exit();
-//                    }
-
                     /** @var Product $product */
-                    foreach ($products as $product) {
-                        if (!$product->getHidden()) { ?>
-                        <div class="col mb-4">
-                            <div class="card">
-                                <img src="public/images/questionmark.jpg" class="card-img-top img-karta" alt="">
-                                <div class="card-body row">
-                                    <h5 class="card-title titulok"><?php echo $product->getTitul(); ?></h5>
-                                    <p class="card-text text-start card-text-custom"><?php echo $product->getPopis(); ?></p>
-                                    <p class="card-text text-start"><i class="fa-solid fa-coins"> <?php echo $product->getCena(); ?> </i></p>
-                                    <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> <?php echo $product->getPocet(); ?></i></p>
-                                    <br>
 
-                                    <form method="post">
-                                        <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
-                                        <button class="btn btn-primary">Zakupit</button>
-                                        <?php if ($auth->isLogged()) { ?>
+                        foreach ($products as $product) {
+                            if (!$product->getHidden()) { ?>
+                                <div class="col mb-4">
+                                    <div class="card">
+                                        <img src="public/images/questionmark.jpg" class="card-img-top img-karta" alt="">
+                                        <div class="card-body row">
+                                            <h5 class="card-title titulok"><?php echo $product->getTitul(); ?></h5>
+                                            <p class="card-text text-start card-text-custom"><?php echo $product->getPopis(); ?></p>
+                                            <p class="card-text text-start"><i class="fa-solid fa-coins"> <?php echo $product->getCena(); ?> </i></p>
+                                            <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> <?php echo $product->getPocet(); ?></i></p>
                                             <br>
-                                            <button class="btn btn-danger" name="delete" onclick="return confirm('Are you sure you want to delete?')">Vymazat</button>
-                                            <button class="btn btn-warning" name="edit">Upravit</button>
-                                        <?php } ?>
-                                    </form>
+
+                                            <form method="post">
+                                                <input type="hidden" name="id" value="<?php echo $product->getIdProduct(); ?>">
+                                                <button class="btn btn-primary">Zakupit</button>
+                                                <?php if ($auth->isLogged()) { ?>
+                                                    <br>
+                                                    <button class="btn btn-danger" name="delete" onclick="return confirm('Are you sure you want to delete?')">Vymazat</button>
+                                                    <button class="btn btn-warning" name="edit">Upravit</button>
+                                                <?php } ?>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    <?php }
+                            <?php }
+                        }
+                    } else {
+                        echo "<h1 class='text-warning text-start'>Store doesnt have items!</h1>";
                     } ?>
                 </div>
             </div>

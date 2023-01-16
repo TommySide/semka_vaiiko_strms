@@ -13,7 +13,7 @@ function showHidePwd() {
 
 function showHidePwdReg() {
     const pwd1 = document.getElementsByName("password")[0];
-    const pwd2 = document.getElementsByName("password-rep")[0];
+    const pwd2 = document.getElementsByName("passwordRepeat")[0];
     const oko = document.getElementById("aa");
     const okoa = document.getElementById("bb");
 
@@ -32,7 +32,7 @@ function showHidePwdReg() {
 
 function heslaZhoda() {
     const pwd1 = document.getElementsByName("password")[0];
-    const pwd2 = document.getElementsByName("password-rep")[0];
+    const pwd2 = document.getElementsByName("passwordRepeat")[0];
     const hesla = document.getElementById("hesla");
 
     if (pwd1.value !== "" && pwd2.value !== "") {

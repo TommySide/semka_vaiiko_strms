@@ -30,4 +30,16 @@ class UserController extends AControllerBase
     {
         return $this->html();
     }
+
+    public function changepwd(): Response
+    {
+        return $this->html(NULL, viewName: "pwd_change.form");
+    }
+
+    public function trychange() {
+        $data = $this->request()->getPost();
+        $arr = $this->app->getAuth()->getLoggedUserContext();
+        echo "$arr";
+        print_r($arr);
+    }
 }

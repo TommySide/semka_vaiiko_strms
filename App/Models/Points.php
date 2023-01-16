@@ -8,6 +8,11 @@ class Points extends Model
 {
     protected $id, $points, $id_user, $id_streamer;
 
+    public static function getPkColumnName() : string
+    {
+        return 'id';
+    }
+
     /**
      * @return mixed
      */

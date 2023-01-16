@@ -6,22 +6,32 @@ use App\core\Model;
 
 class Product extends Model
 {
-    protected $id, $titul, $popis, $cena, $pocet, $id_streamer, $hidden;
+    protected $id_product, $titul, $popis, $cena, $pocet, $id_streamer, $hidden;
+
+    public static function getPkColumnName() : string
+    {
+        return 'id_product';
+    }
+
+    static public function setTableName()
+    {
+        return "products";
+    }
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getIdProduct()
     {
-        return $this->id;
+        return $this->id_product;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $id_product
      */
-    public function setId($id): void
+    public function setIdProduct($id_product): void
     {
-        $this->id = $id;
+        $this->id_product = $id_product;
     }
 
     /**

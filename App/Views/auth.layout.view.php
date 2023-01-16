@@ -16,7 +16,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a href="index.php" class="navbar-brand logo">STRMS</a>
+        <a href="?c=home" class="navbar-brand logo">STRMS</a>
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navig">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,13 +25,16 @@
                 <li class="">
                     <a class="" href="?c=home">Home</a>
                 </li>
+                <li class="">
+                    <a class="" href="?c=contact">Contact</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <?php if (!$auth->isLogged()) { ?>
                     <li><a href="<?= \App\Config\Configuration::LOGIN_URL ?>">Login</a></li>
                     <li><a href="<?= \App\Config\Configuration::REGISTER_URL ?>">Register</a></li>
                 <?php } else { ?>
-                    <li><a href="profile.php?user=<?php echo $auth->getLoggedUserId(); ?>"><?php echo $auth->getLoggedUserName(); ?></a></li>
+                    <li><a href="?c=user"><?php echo $auth->getLoggedUserName(); ?></a></li>
                     <li><a href="?c=auth&a=logout">Logout</a></li>
                 <?php } ?>
             </ul>
