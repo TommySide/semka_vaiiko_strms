@@ -47,36 +47,8 @@ class AuthController extends AControllerBase
         $formData = $this->app->getRequest()->getPost();
 
         if (isset($formData['submit'])) {
-            if (empty($formData['nickname']) || empty($formData['email']) || empty($formData['password']) || empty($formData['passwordRepeat'])) {
-                $data = ['message' => 'Prazdne polia!'];
-                return $this->html($data);
-            }
-            if (!$this->invalidNickname($formData['nickname'])) {
-                $data = [
-                    'message' => 'Nepovolené znaky!',
-                    'email' => $formData['email']
-                ];
-                return $this->html($data);
-            }
-            if (!$this->invalidEmail($formData['email'])) {
-                $data = [
-                    'message' => 'Zlý tvar emailu!',
-                    'nickname' => $formData['nickname']
-                ];
-                return $this->html($data);
-            }
-            if (!$this->pwdMatch($formData['password'], $formData['passwordRepeat'])) {
-                $data = [
-                    'message' => 'Hesla sa nezhodujú!',
-                    'nickname' => $formData['nickname'],
-                    'email' => $formData['email']
-                ];
-                return $this->html($data);
-            }
-            if (!$this->nicknameTaken($formData['nickname'], $formData['email'])) {
-                $data = ['message' => 'Meno alebo email už sú obsadené!'];
-                return $this->html($data);
-            }
+
+            $result = $this->checkInput($formData);
 
             $hashPwd = password_hash($formData['password'], PASSWORD_DEFAULT);
 
@@ -103,28 +75,77 @@ class AuthController extends AControllerBase
         return $this->redirect("?c=home");
     }
 
-    private function invalidNickname($nickname) {
+    private function checkInput($array)  {
+        if ($this->emptyFields($array)) {
+            $data = [
+                'message' => 'Prázdne polia!',
+            ];
+            return $data;
+        }
+
+        if ($this->invalidNickname($array['nickname'])) {
+            $data = [
+                'message' => 'Nepovolené znaky!',
+                'email' => $array['email']
+            ];
+            return $data;
+        }
+        if ($this->invalidEmail($array['email'])) {
+            $data = [
+                'message' => 'Zlý tvar emailu!',
+                'nickname' => $array['nickname']
+            ];
+            return $data;
+        }
+        if (!$this->pwdMatch($array['password'], $array['passwordRepeat'])) {
+            $data = [
+                'message' => 'Hesla sa nezhodujú!',
+                'nickname' => $array['nickname'],
+                'email' => $array['email']
+            ];
+            return $data;
+        }
+        if (!$this->nicknameTaken($array['nickname'], $array['email'])) {
+            $data = ['message' => 'Meno alebo email už sú obsadené!'];
+            return $data;
+        }
+        return null;
+    }
+
+    private function emptyFields($array): bool
+    {
+        if (empty($array['nickname']) || empty($array['email']) || empty($array['password']) || empty($array['passwordRepeat'])) {
+            return true;
+        }
+        return false;
+    }
+
+    private function invalidNickname($nickname): bool
+    {
         if (!preg_match("/^[a-zA-Z0-9]*$/", $nickname)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    private function invalidEmail($email) {
+    private function invalidEmail($email): bool
+    {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    private function pwdMatch($pwd, $pwdRep) {
-        if ($pwd !== $pwdRep) {
-            return false;
+    private function pwdMatch($pwd, $pwdRep): bool
+    {
+        if ($pwd === $pwdRep) {
+            return true;
         }
-        return true;
+        return false;
     }
 
-    private function nicknameTaken($nickname, $email) {
+    private function nicknameTaken($nickname, $email): bool
+    {
         $user = User::getAll('nickname = ? OR email = ?', [$nickname, $email]);
         if ($user == NULL) {
             return false;

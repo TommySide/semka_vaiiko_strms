@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Managestreamers;
 use App\Models\Product;
 use App\Models\Streamer;
 use App\Models\Points;
@@ -34,7 +35,24 @@ class StoreController extends AControllerBase
             [
                 'products' => $products,
                 'streamer' => $streamer,
-                'points' => ($points == NULL) ? NULL : $points[0]
+                'points' => ($points == NULL) ? NULL : $points[0],
+                'manage' => ($this->isManagement($id))
             ]);
+    }
+
+    public function isManagement($id): bool {
+        if ($this->app->getAuth()->isLogged() && Managestreamers::getAll("id_streamer = ? AND id_user = ?", [$id, $this->app->getAuth()->getLoggedUserId()]))
+            return true;
+        return false;
+    }
+
+    public function create() {
+        return $this->html(new Streamer(), viewName: "create.form");
+    }
+
+    public function edit() {
+        $id = $this->request()->getValue("id");
+
+
     }
 }

@@ -14,6 +14,7 @@ $streamer = $data['streamer'];
 $points = $data['points'];
 /** @var Product[] $products */
 $products = $data['products'];
+$manage = $data['manage'];
 ?>
 
 
@@ -92,16 +93,17 @@ $products = $data['products'];
                                             <p class="card-text text-start"><i class="fa-solid fa-coins"> <?php echo $product->getCena(); ?> </i></p>
                                             <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> <?php echo $product->getPocet(); ?></i></p>
                                             <br>
-
-                                            <form method="post">
-                                                <input type="hidden" name="id" value="<?php echo $product->getIdProduct(); ?>">
-                                                <button class="btn btn-primary">Zakupit</button>
-                                                <?php if ($auth->isLogged()) { ?>
-                                                    <br>
-                                                    <button class="btn btn-danger" name="delete" onclick="return confirm('Are you sure you want to delete?')">Vymazat</button>
-                                                    <button class="btn btn-warning" name="edit">Upravit</button>
-                                                <?php } ?>
-                                            </form>
+                                            <?php if ($auth->isLogged()) { ?>
+                                                <form method="post">
+                                                    <input type="hidden" name="id" value="<?php echo $product->getIdProduct(); ?>">
+                                                    <button class="btn btn-primary">Zakupit</button>
+                                                    <?php if ($manage) { ?>
+                                                        <br>
+                                                        <button class="btn btn-danger" name="delete" onclick="return confirm('Are you sure you want to delete?')">Vymazat</button>
+                                                        <button class="btn btn-warning" name="edit">Upravit</button>
+                                                    <?php } ?>
+                                                </form>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
