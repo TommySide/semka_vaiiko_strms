@@ -29,7 +29,7 @@ class HomeController extends AControllerBase
      */
     public function index(): Response
     {
-        $streamers = Streamer::getAll();
+        $streamers = Streamer::getAll("", [], Streamer::getPkColumnName()." DESC LIMIT 4");
         return $this->html($streamers);
     }
 

@@ -207,3 +207,6 @@ footer a:hover {
     transform: scale(1.3);
     transition: 0.3s ease-out;
 }
+.form-group form {
+    margin-bottom: 0.25em;
+}

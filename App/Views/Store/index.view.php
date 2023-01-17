@@ -30,7 +30,8 @@ $owner = $data['owner'];
 
                 <section class="info text-start">
                     <?php if ($auth->isLogged()) { ?>
-                        <div><i class="fa-solid fa-coins"></i> You currently have <?php if ($points != NULL) { $points->getPoints(); } else { echo "0"; } ?> points</div>
+                        <div><i class="fa-solid fa-coins"></i> You currently have <?php if ($points != NULL) {
+                            echo number_format($points->getPoints(),0, ",", "."); } else { echo "0"; } ?> points</div>
                         <div><i class="fa-solid fa-globe"></i> Your rank will be here.</div>
                         <div><i class="fa-solid fa-heart"></i> You can receive 1 point for each minute watched.</div>
                     <?php } else { ?>
@@ -56,11 +57,14 @@ $owner = $data['owner'];
                             <input type="hidden" name="id" value="<?php echo $streamer->getIdStreamer(); ?>">
                             <button class="btn btn-primary" name="pridaj">Upravit profil</button>
                         </form>
-                        <form action="" method="get">
+                        <form action="" method="post">
                             <input type="hidden" name="id" value="<?php echo $streamer->getIdStreamer(); ?>">
                             <button class="btn btn-primary" name="pridaj">Pridaj produkt</button>
                         </form>
-                        <br>
+                        <form action="" method="post">
+                            <input type="hidden" name="id" value="<?php echo $streamer->getIdStreamer(); ?>">
+                            <button class="btn btn-primary" name="pridaj">Pridaj admina</button>
+                        </form>
                         <form method="post" action="?c=store&a=addpoints&id=<?php echo $streamer->getIdStreamer(); ?>" style="padding: 5px;">
                             <input type="text" style="margin: 5px;" class="form-control" name="komu" placeholder="Komu pridat body">
                             <input type="number" style="margin: 5px;" class="form-control" name="kolko" placeholder="Kolko bodov pridat">

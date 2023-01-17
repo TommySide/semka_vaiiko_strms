@@ -9,7 +9,6 @@ use App\Models\Managestreamers;
 use App\Models\Product;
 use App\Models\Streamer;
 use App\Models\Points;
-use App\Models\User;
 
 /** @var \App\Core\IAuthenticator $auth */
 
@@ -23,21 +22,28 @@ class StoreController extends AControllerBase
         if ($id == null || !is_numeric($id)) {
             return $this->redirect("?c=home");
         }
-        $products = Product::getAll("id_streamer = ?", [$id]);
         $streamer = Streamer::getOne($id);
         if ($streamer == null) {
             return $this->redirect("?c=home");
         }
+        $products = Product::getAll("id_streamer = ?", [$id]);
         $points = NULL;
         if ($this->app->getAuth()->isLogged()) {
             $points = Points::getAll("id_streamer = ? AND id_user = ?", [$id, $this->app->getAuth()->getLoggedUserId()]);
+            if (!$points) {
+                $points[0] = new Points();
+                $points[0]->setIdUser($this->app->getAuth()->getLoggedUserId());
+                $points[0]->setIdStreamer($id);
+                $points[0]->setPoints(0);
+                $points[0]->save();
+            }
         }
 
         return $this->html(
             [
                 'products' => $products,
                 'streamer' => $streamer,
-                'points' => ($points == NULL) ? NULL : $points[0],
+                'points' => $points[0],
                 'manage' => $this->isManagement($id),
                 'owner' => $this->isOwner($id)
             ]);

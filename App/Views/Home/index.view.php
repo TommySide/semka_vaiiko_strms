@@ -6,13 +6,13 @@ use App\Models\Streamer;
 
 <div class="container-fluid">
     <div class="text-white" style="margin: 5em 0em;">
-        <h1 class="text-center">Reward your viewers!</h1>
-        <h2 class="text-center">Engage, earn and spend!</h2>
+        <h1 class="text-center">Odmeňte svojich divákov!</h1>
+        <h2 class="text-center">Engage, earn and spend</h2>
     </div>
 </div>
 <div class="bg-white text-black text-center" style="padding: 2em 0em;">
-    <h1>Trusted by the best</h1>
-    <h3>Some of the newest content creators!</h3>
+    <h1>Dôverované najlepšími</h1>
+    <h3>Prezrite si obchody naších najnovších klientov</h3>
     <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4" style="margin: 2em 10em;">
         <?php foreach ($data as $streamer) { ?>
             <a href="?c=store&id=<?php echo $streamer->getIdStreamer(); ?>" class="noa">

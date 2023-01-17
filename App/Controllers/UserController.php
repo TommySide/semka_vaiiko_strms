@@ -67,6 +67,16 @@ class UserController extends AControllerBase
         return $this->html(NULL, viewName: "pwd_change.form");
     }
 
+    public function delete() {
+        $streamer = Streamer::getAll("id_user = ?", [$this->app->getAuth()->getLoggedUserId()]);
+        if ($streamer)
+            $streamer[0]->delete();
+        $user = User::getOne($this->app->getAuth()->getLoggedUserId());
+        $user->delete();
+        $this->app->getAuth()->logout();
+        return $this->redirect("?c=home");
+    }
+
     private function emptyFields($array): bool
     {
         if (empty($array['passwordCurrent']) || empty($array['password']) || empty($array['passwordRepeat']))

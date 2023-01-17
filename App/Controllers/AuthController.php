@@ -60,7 +60,7 @@ class AuthController extends AControllerBase
                 return $this->html($data);
             }
             $data = ['message' => 'Uspesne registrovany!'];
-            return $this->html($data);
+            return $this->html($data, viewName: "login");
         }
         return $this->html();
     }
