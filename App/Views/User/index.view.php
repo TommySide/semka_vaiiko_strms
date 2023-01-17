@@ -15,7 +15,8 @@
                     <a href="?c=store&id=<?= @$data ?>"><button>otvor obchod</button></a>
                 <?php } ?>
                     <a href="?c=management"><button>zoznam obchodov</button></a>
-                    <a href="?c=user&a=delete" onclick="return confirm('Are you sure you want to delete?')"><button class="bg-danger">zmazat ucet</button></a>
+
+                    <a href="?c=user&a=delete" onclick="return confirm('Isto chceš zmazať svoj účet a spolu s tým (ak existuje) stream profil?')"><button class="bg-danger">zmazat ucet</button></a>
         </div>
     </div>
 </div>

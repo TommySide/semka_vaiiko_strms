@@ -45,3 +45,12 @@ function heslaZhoda() {
         }
     }
 }
+
+function showForm() {
+    const form = document.getElementById("formPridaj");
+    if (form.style.display === "none") {
+        form.style.display = "block";
+    } else {
+        form.style.display = "none";
+    }
+}

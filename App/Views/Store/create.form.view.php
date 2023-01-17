@@ -25,6 +25,8 @@ use \App\Models\Streamer;
                 <input type="text" name="instagram" class="text-white" value="<?= @$streamer->getInstagram(); ?>" placeholder="instagram"/>
                 <input type="text" name="telegram" class="text-white" value="<?= @$streamer->getTelegram(); ?>" placeholder="telegram"/>
                 <input type="text" name="twitter" class="text-white" value="<?= @$streamer->getTwitter(); ?>" placeholder="twitter"/>
+                <input type="text" name="twitch" class="text-white" value="<?= @$streamer->getTwitch(); ?>" placeholder="twitch"/>
+
                 <?php if ($streamer->getIdStreamer()) { ?>
                     <input type="hidden" name="id" value="<?= @$streamer->getIdStreamer(); ?>">
                 <?php } ?>

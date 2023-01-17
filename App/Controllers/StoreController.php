@@ -15,25 +15,25 @@ use App\Models\Points;
 
 class StoreController extends AControllerBase
 {
-
+    private int $idStreamer;
     public function index(): Response
     {
-        $id = $this->request()->getValue('id');
-        if ($id == null || !is_numeric($id)) {
+        $this->idStreamer = $this->request()->getValue('id');
+        if ($this->idStreamer == null || !is_numeric($this->idStreamer)) {
             return $this->redirect("?c=home");
         }
-        $streamer = Streamer::getOne($id);
+        $streamer = Streamer::getOne($this->idStreamer);
         if ($streamer == null) {
             return $this->redirect("?c=home");
         }
-        $products = Product::getAll("id_streamer = ?", [$id]);
+        $products = Product::getAll("id_streamer = ?", [$this->idStreamer]);
         $points = NULL;
         if ($this->app->getAuth()->isLogged()) {
-            $points = Points::getAll("id_streamer = ? AND id_user = ?", [$id, $this->app->getAuth()->getLoggedUserId()]);
+            $points = Points::getAll("id_streamer = ? AND id_user = ?", [$this->idStreamer, $this->app->getAuth()->getLoggedUserId()]);
             if (!$points) {
                 $points[0] = new Points();
                 $points[0]->setIdUser($this->app->getAuth()->getLoggedUserId());
-                $points[0]->setIdStreamer($id);
+                $points[0]->setIdStreamer($this->idStreamer);
                 $points[0]->setPoints(0);
                 $points[0]->save();
             }
@@ -43,22 +43,22 @@ class StoreController extends AControllerBase
             [
                 'products' => $products,
                 'streamer' => $streamer,
-                'points' => $points[0],
-                'manage' => $this->isManagement($id),
-                'owner' => $this->isOwner($id)
+                'points' => ($points) ? $points[0] : 0,
+                'manage' => $this->isManagement($this->idStreamer),
+                'owner' => $this->isOwner($this->idStreamer)
             ]);
     }
 
-    public function isManagement($id): bool {
+    public function isManagement($idStreamer): bool {
         if ($this->app->getAuth()->isLogged() &&
-            Managestreamers::getAll("id_streamer = ? AND id_user = ?", [$id, $this->app->getAuth()->getLoggedUserId()]))
+            Managestreamers::getAll("id_streamer = ? AND id_user = ?", [$idStreamer, $this->app->getAuth()->getLoggedUserId()]))
             return true;
         return false;
     }
 
-    public function isOwner($id) {
+    public function isOwner($idStreamer) {
         if ($this->app->getAuth()->isLogged() &&
-            Streamer::getAll("id_streamer = ? AND id_user = ?", [$id, $this->app->getAuth()->getLoggedUserId()]))
+            Streamer::getAll("id_streamer = ? AND id_user = ?", [$idStreamer, $this->app->getAuth()->getLoggedUserId()]))
             return true;
         return false;
     }
@@ -67,7 +67,7 @@ class StoreController extends AControllerBase
         $data = [
             'streamer' => new Streamer(),
             'message' => 'Novy streamer'];
-        return ($this->app->getAuth()->isLogged()) ? $this->html($data, viewName: "create.form") : $this->redirect(Configuration::LOGIN_URL);
+        return (($this->app->getAuth()->isLogged()) ? $this->html($data, viewName: "create.form") : $this->redirect(Configuration::LOGIN_URL));
     }
 
     public function submit() {
@@ -95,11 +95,12 @@ class StoreController extends AControllerBase
         $streamer->setInstagram(!$post['instagram'] ? "" : $post['instagram']);
         $streamer->setTelegram(!$post['telegram'] ? "" : $post['telegram']);
         $streamer->setTwitter(!$post['twitter'] ? "" : $post['twitter']);
+        $streamer->setTwitch(!$post['twitch'] ? "" : $post['twitch']);
         if ($streamer->getIdUser() == NULL)
             $streamer->setIdUser($this->app->getAuth()->getLoggedUserId());
         $streamer->save();
 
-        return $this->redirect("?c=store&id=".$streamer->getIdStreamer());
+        return $this->redirect("?c=store&id=".$streamer->getIdStreamer()."&success=profilecreated");
     }
 
     public function edit(): Response {
@@ -107,13 +108,77 @@ class StoreController extends AControllerBase
         $data = [
             'streamer' => Streamer::getOne($id),
             'message' => 'Uprava profilu'];
-        return ($this->app->getAuth()->isLogged()) ? $this->html($data, viewName: "create.form") : $this->redirect(Configuration::LOGIN_URL);
+        return (($this->isManagement($id) ||
+            $this->isOwner($id)) ? $this->html($data, viewName: "create.form") :
+            $this->redirect("?c=store&id=".$id."&error=nomngt"));
+    }
+
+    public function add(): Response {
+        $id = $this->request()->getValue("id");
+        $data = [
+            'product' => new Product(),
+            'streamer' => $id,
+            'message' => 'Pridanie produktu'
+        ];
+        return (($this->isManagement($id) ||
+            $this->isOwner($id)) ? $this->html($data, viewName: "product.form") :
+            $this->redirect("?c=store&id=".$id."&error=nomngt"));
+    }
+
+    public function editproduct(): Response {
+        $id = $this->request()->getValue("id");
+        $idS = $this->request()->getValue("idS");
+        $data = [
+            'product' => Product::getOne($id),
+            'message' => 'Pridanie produktu',
+            'streamer' => $idS
+        ];
+        return (($this->isManagement($idS) ||
+            $this->isOwner($idS)) ? $this->html($data, viewName: "product.form") :
+            $this->redirect("?c=store&id=".$idS."&error=nomngt"));
+    }
+
+    public function delete(): Response {
+        $id = $this->request()->getValue("id");
+        $idS = $this->request()->getValue("idS");
+        if ($this->isOwner($idS) || $this->isManagement($idS)) {
+            $product = Product::getOne($id);
+            $product->delete();
+            return $this->redirect("?c=store&id=".$idS."&success=productdeleted");
+        }
+        return $this->redirect("?c=store&id=".$idS."&error=nomngt");
+    }
+
+    public function submitproduct() {
+        $post = $this->request()->getPost();
+        if (isset($post['id']))
+            $product = Product::getOne($post['id']);
+        else
+            $product = new Product();
+        array_pop($post);
+        if ($this->invalidName($post) || empty($post['titul'])) {
+            $data = [
+                'product' => $product,
+                'message' => "Nepovolene znaky!",
+                'streamer' => $post['idStreamer']
+            ];
+            return $this->html($data, viewName: "product.form");
+        }
+        $product->setIdStreamer($post['idStreamer']);
+        $product->setTitul($post['titul']);
+        $product->setPopis($post['popis']);
+        $product->setCena($post['cena']);
+        $product->setPocet($post['kusy']);
+        $product->setHidden(($post['hidden']) ? 1 : 0);
+        $product->save();
+
+        return $this->redirect("?c=store&id=".$product->getIdStreamer()."&success=productadded");
     }
 
     private function invalidName($data): bool
     {
         foreach ($data as $one)
-            if (!preg_match('/^[a-zA-Z0-9 _]+$/', $one))
+            if (!preg_match('/^[a-zA-Z0-9 _,.\pL]+$/ui', $one))
                 return true;
         return false;
     }

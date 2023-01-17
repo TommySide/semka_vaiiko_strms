@@ -6,7 +6,23 @@ use App\core\Model;
 
 class Streamer extends Model
 {
-    protected $id_streamer, $name, $popis, $smallpopis, $www, $fb, $discord, $youtube, $instagram, $telegram, $twitter, $id_user;
+    protected $id_streamer, $name, $popis, $smallpopis, $www, $fb, $discord, $youtube, $instagram, $telegram, $twitter, $id_user, $twitch;
+
+    /**
+     * @return mixed
+     */
+    public function getTwitch()
+    {
+        return $this->twitch;
+    }
+
+    /**
+     * @param mixed $twitch
+     */
+    public function setTwitch($twitch): void
+    {
+        $this->twitch = $twitch;
+    }
 
     /**
      * @return mixed
