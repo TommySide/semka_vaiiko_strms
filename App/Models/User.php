@@ -14,12 +14,11 @@ class User extends Model
      * @param $email
      * @param $hasStore
      */
-    public function __construct(string $nickname = "", string $email = "", string $password = "", int $hasStore = 0)
+    public function __construct(string $nickname = "", string $email = "", string $password = "")
     {
         $this->nickname = $nickname;
         $this->password = $password;
         $this->email = $email;
-        $this->hasStore = $hasStore;
     }
 
     public static function getPkColumnName() : string
@@ -89,22 +88,4 @@ class User extends Model
     {
         $this->email = $email;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getHasStore()
-    {
-        return $this->hasStore;
-    }
-
-    /**
-     * @param mixed $hasStore
-     */
-    public function setHasStore($hasStore): void
-    {
-        $this->hasStore = $hasStore;
-    }
-
-
 }

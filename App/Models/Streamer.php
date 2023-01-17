@@ -6,7 +6,23 @@ use App\core\Model;
 
 class Streamer extends Model
 {
-    protected $id_streamer, $name, $popis, $smallpopis, $www, $fb, $discord, $youtube, $instagram, $telegram, $twitter;
+    protected $id_streamer, $name, $popis, $smallpopis, $www, $fb, $discord, $youtube, $instagram, $telegram, $twitter, $id_user;
+
+    /**
+     * @return mixed
+     */
+    public function getIdUser()
+    {
+        return $this->id_user;
+    }
+
+    /**
+     * @param mixed $id_user
+     */
+    public function setIdUser($id_user): void
+    {
+        $this->id_user = $id_user;
+    }
 
     public static function getPkColumnName() : string
     {
@@ -22,7 +38,7 @@ class Streamer extends Model
     }
 
     /**
-     * @param mixed $id_streamer
+     * @param int $id_streamer
      */
     public function setIdStreamer($id_streamer): void
     {

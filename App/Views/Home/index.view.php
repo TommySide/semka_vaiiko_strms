@@ -13,7 +13,7 @@ use App\Models\Streamer;
 <div class="bg-white text-black text-center" style="padding: 2em 0em;">
     <h1>Trusted by the best</h1>
     <h3>Some of the newest content creators!</h3>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4" style="margin: 2em 10em;">
+    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4" style="margin: 2em 10em;">
         <?php foreach ($data as $streamer) { ?>
             <a href="?c=store&id=<?php echo $streamer->getIdStreamer(); ?>" class="noa">
                 <div class="col mb-4">

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Streamer;
 use App\Models\User;
 
 /**
@@ -32,8 +33,12 @@ class UserController extends AControllerBase
     public function index(): Response
     {
         $this->user = User::getOne($this->app->getAuth()->getLoggedUserId());
-        return $this->html($this->user->getHasStore());
+        $st = Streamer::getAll("id_user = ?", [$this->user->getIdUser()]);
+        if ($st != NULL)
+            return $this->html($st[0]->getIdStreamer());
+        return $this->html(0);
     }
+
 
     public function changepwd(): Response
     {

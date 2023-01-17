@@ -48,11 +48,11 @@ class AuthController extends AControllerBase
 
         if (isset($formData['submit'])) {
 
-            $result = $this->checkInput($formData);
+            $this->checkInput($formData);
 
             $hashPwd = password_hash($formData['password'], PASSWORD_DEFAULT);
 
-            $user = new User($formData['nickname'], $formData['email'], $hashPwd, 0);
+            $user = new User($formData['nickname'], $formData['email'], $hashPwd);
             try {
                 $user->save();
             } catch (\Exception $e) {
