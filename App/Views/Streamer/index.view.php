@@ -16,7 +16,7 @@ $layout = 'root';
             <div class="col-xl text-center">
                 <form action="?c=streamer&a=find" method="post">
                     <div class="form-group mb-3">
-                        <input type="search" placeholder="Meno streamera co hladas" name="search" aria-describedby="button-addon" class="form-control">
+                        <input type="search" placeholder="Meno streamera co hladas" name="search" class="form-control">
                     </div>
                 </form>
                 <?= @$data['message']; ?>
