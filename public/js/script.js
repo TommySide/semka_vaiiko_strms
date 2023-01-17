@@ -34,14 +34,17 @@ function heslaZhoda() {
     const pwd1 = document.getElementsByName("password")[0];
     const pwd2 = document.getElementsByName("passwordRepeat")[0];
     const hesla = document.getElementById("hesla");
+    const button = document.getElementById("submit-reg");
 
     if (pwd1.value !== "" && pwd2.value !== "") {
         if (pwd1.value !== pwd2.value) {
             hesla.innerHTML = "Hesla sa nezhoduju!!";
             hesla.className = "text-danger";
+            button.disabled = true;
         } else {
             hesla.innerHTML = "Hesla sa zhoduju!!";
             hesla.className = "text-success";
+            button.disabled = false;
         }
     }
 }

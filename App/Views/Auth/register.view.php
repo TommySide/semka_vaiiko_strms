@@ -20,7 +20,7 @@ $layout = 'root';
                     <i class="fa-regular fa-eye fa-lg" id="bb" onclick="showHidePwdReg()"></i>
                 </div>
                 <h5 id="hesla"></h5>
-                <button name="submit">registruj</button>
+                <button name="submit-reg">registruj</button>
                 <p class="message">Už si zaregistrovaný? <a href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlás sa</a></p>
             </form>
         </div>

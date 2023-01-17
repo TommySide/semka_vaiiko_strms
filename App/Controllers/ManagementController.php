@@ -4,7 +4,10 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Boughtproducts;
 use App\Models\Managestreamers;
+use App\Models\Points;
+use App\Models\Product;
 use App\Models\Streamer;
 use App\Models\User;
 
@@ -54,6 +57,44 @@ class ManagementController extends AControllerBase
         return $this->redirect("?c=management&error=nouser");
     }
 
+    public function history(): Response {
+        $products = Boughtproducts::getAll("id_user = ?", [$this->app->getAuth()->getLoggedUserId()]);
+
+        $arrP = [];
+        $arrS = [];
+
+        foreach ($products as $item) {
+            $product = Product::getOne($item->getIdProduct());
+            $streamer = Streamer::getOne($item->getIdStreamer());
+            array_push($arrP, $product);
+            array_push($arrS, $streamer);
+        }
+
+        return $this->html([
+            "bp" => $products,
+            "products" => $arrP,
+            "streamers" => $arrS
+        ]);
+    }
+
+    public function points(): Response {
+        $id = $this->request()->getValue("id");
+        $points = Points::getAll("id_streamer = ?", [$id]);
+        $arr = [];
+        $i = 0;
+        foreach ($points as $point) {
+            $user = User::getOne($point->getIdUser());
+            $arr[$i] = [
+                "user" => $user->getNickname(),
+                "email" => $user->getEmail(),
+                "points" => $point->getPoints()
+            ];
+            $i++;
+        }
+
+        return $this->html($arr);
+    }
+
     private function isAdmin($id): bool {
         $je = Managestreamers::getAll("id_user = ? AND id_streamer = ?", [$id, $this->hasStore()]);
 
@@ -91,7 +132,7 @@ class ManagementController extends AControllerBase
 
     private function checkText($data): bool
     {
-        if (!preg_match('/^[a-zA-Z0-9 _]+$/', $data))
+        if (!preg_match('/^[a-zA-Z0-9 _@.]+$/', $data))
             return true;
         return false;
     }

@@ -4,36 +4,38 @@ namespace App\Controllers;
 
 use App\Config\Configuration;
 use App\Core\AControllerBase;
+use App\Core\Model;
 use App\Core\Responses\Response;
+use App\Models\Boughtproducts;
 use App\Models\Managestreamers;
 use App\Models\Product;
 use App\Models\Streamer;
 use App\Models\Points;
+use App\Models\User;
 
 /** @var \App\Core\IAuthenticator $auth */
 
 
 class StoreController extends AControllerBase
 {
-    private int $idStreamer;
     public function index(): Response
     {
-        $this->idStreamer = $this->request()->getValue('id');
-        if ($this->idStreamer == null || !is_numeric($this->idStreamer)) {
+        $idStreamer = $this->request()->getValue('id');
+        if ($idStreamer == null || !is_numeric($idStreamer)) {
             return $this->redirect("?c=home");
         }
-        $streamer = Streamer::getOne($this->idStreamer);
+        $streamer = Streamer::getOne($idStreamer);
         if ($streamer == null) {
             return $this->redirect("?c=home");
         }
-        $products = Product::getAll("id_streamer = ?", [$this->idStreamer]);
+        $products = Product::getAll("id_streamer = ?", [$idStreamer]);
         $points = NULL;
         if ($this->app->getAuth()->isLogged()) {
-            $points = Points::getAll("id_streamer = ? AND id_user = ?", [$this->idStreamer, $this->app->getAuth()->getLoggedUserId()]);
+            $points = Points::getAll("id_streamer = ? AND id_user = ?", [$idStreamer, $this->app->getAuth()->getLoggedUserId()]);
             if (!$points) {
                 $points[0] = new Points();
                 $points[0]->setIdUser($this->app->getAuth()->getLoggedUserId());
-                $points[0]->setIdStreamer($this->idStreamer);
+                $points[0]->setIdStreamer($idStreamer);
                 $points[0]->setPoints(0);
                 $points[0]->save();
             }
@@ -44,8 +46,8 @@ class StoreController extends AControllerBase
                 'products' => $products,
                 'streamer' => $streamer,
                 'points' => ($points) ? $points[0] : 0,
-                'manage' => $this->isManagement($this->idStreamer),
-                'owner' => $this->isOwner($this->idStreamer)
+                'manage' => $this->isManagement($idStreamer),
+                'owner' => $this->isOwner($idStreamer)
             ]);
     }
 
@@ -143,6 +145,10 @@ class StoreController extends AControllerBase
         $idS = $this->request()->getValue("idS");
         if ($this->isOwner($idS) || $this->isManagement($idS)) {
             $product = Product::getOne($id);
+            $bought = Boughtproducts::getAll("id_product = ?", [$id]);
+            foreach ($bought as $item) {
+                $item->delete();
+            }
             $product->delete();
             return $this->redirect("?c=store&id=".$idS."&success=productdeleted");
         }
@@ -178,8 +184,64 @@ class StoreController extends AControllerBase
     private function invalidName($data): bool
     {
         foreach ($data as $one)
-            if (!preg_match('/^[a-zA-Z0-9 _,.\pL]+$/ui', $one))
+            if ($one !== "" && !preg_match('/^[\-a-zA-Z0-9 &@,.!\'\pL?$]+$/ui', $one))
                 return true;
         return false;
+    }
+
+    public function addpoints() {
+        $data = $this->request()->getPost();
+        if (empty($data['komu']) || empty($data['kolko'])) {
+            return $this->redirect("?c=store&error=empty");
+        }
+        if ($this->invalidName([$data['komu']])) {
+            return $this->redirect("?c=store&error=chars");
+        }
+
+        $user = User::getAll("nickname = ? OR email = ? OR id_user = ?", [$data["komu"], $data["komu"], $data["komu"]]);
+        if ($user) {
+            $user = $user[0]->getIdUser();
+            $points = Points::getAll("id_user = ? AND id_streamer = ?", [$user, $data['id']]);
+            $points = ($points) ? $points[0] : new Points();
+            $points->setIdUser($user);
+            $points->setIdStreamer($data['id']);
+            $points->setPoints(($points->getPoints() + $data['kolko']));
+            $points->save();
+            return $this->redirect("?c=store&id=".$data['id']."&success=pointsadded");
+        }
+        return $this->redirect("?c=store&id=".$data['id']."&error=nouser");
+    }
+
+    public function buy(): Response {
+        $idP = $this->request()->getValue("id");
+        $idS = $this->request()->getValue("idS");
+        if (!$this->app->getAuth()->isLogged()) {
+            return $this->redirect("?c=store&id=".$idS."&error=nouser");
+        }
+        $produkt = Product::getOne($idP);
+        $points = Points::getAll("id_user = ? AND id_streamer = ?", [$this->app->getAuth()->getLoggedUserId(), $idS]);
+
+        if ($points) {
+            if ($points[0]->getPoints() >= $produkt->getCena()) {
+                // poslal by sa mail s instrukciami ako vyzdvihnut
+                $points = $points[0];
+                $points->setPoints(($points->getPoints() - $produkt->getCena()));
+                $points->save();
+
+                $produkt->setPocet(($produkt->getPocet() - 1));
+                $produkt->save();
+
+                $bg = new Boughtproducts();
+                $bg->setIdUser($this->app->getAuth()->getLoggedUserId());
+                $bg->setIdProduct($idP);
+                $bg->setIdStreamer($idS);
+                $bg->setDatum(date("Y-m-d h:m:s"));
+                $bg->save();
+
+                return $this->redirect("?c=store&id=".$idS."&success=productbought");
+            }
+            return $this->redirect("?c=store&id=".$idS."&error=notenoughpoints");
+        }
+        return $this->redirect("?c=store&id=".$idS."&error=nouser");
     }
 }

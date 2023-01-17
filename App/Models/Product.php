@@ -13,6 +13,11 @@ class Product extends Model
         return 'id_product';
     }
 
+    static public function getDbColumns(): array
+    {
+        return [ 'id_product' ,'titul', 'popis', 'cena', 'pocet', 'id_streamer', 'hidden' ];
+    }
+
     static public function setTableName()
     {
         return "products";

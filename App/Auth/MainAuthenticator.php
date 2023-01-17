@@ -39,7 +39,7 @@ class MainAuthenticator extends DummyAuthenticator
     }
 
     private function invalidNickname($nickname) {
-        if (!preg_match("/^[a-zA-Z0-9]*$/", $nickname)) {
+        if (!preg_match("/^[a-zA-Z0-9 .@]*$/", $nickname)) {
             return true;
         }
         return false;

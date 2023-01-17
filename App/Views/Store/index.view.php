@@ -28,8 +28,12 @@ $message = (isset($data['message'])) ? $data['message'] : "";
                 if (isset($_GET['error'])) {
                     if ($_GET['error'] == 'nomngt') {
                         echo "<h4 class='text-danger text-center'>Nie si oprávnený</h4>";
-                    } else if ($_GET['error'] == '') {
+                    } else if ($_GET['error'] == 'nouser') {
                         echo "<h4 class='text-danger text-center'>Pouzivatel neexistuje</h4>";
+                    } else if ($_GET['error'] == 'notenoughpoints') {
+                        echo "<h4 class='text-danger text-center'>Nemáš dostatok pointov</h4>";
+                    } else if ($_GET['error'] == 'empty') {
+                        echo "<h4 class='text-danger text-center'>Prazdne polia</h4>";
                     }
                 }
                 if (isset($_GET['success'])) {
@@ -39,9 +43,12 @@ $message = (isset($data['message'])) ? $data['message'] : "";
                         echo "<h4 class='text-success text-center'>Produkt vymazaný</h4>";
                     } else if ($_GET['success'] == 'productadded') {
                         echo "<h4 class='text-success text-center'>Produkt pridaný</h4>";
+                    } else if ($_GET['success'] == 'pointsadded') {
+                        echo "<h4 class='text-success text-center'>Pointy pridane</h4>";
+                    } else if ($_GET['success'] == 'productbought') {
+                        echo "<h4 class='text-success text-center'>Produkt zakupeny</h4>";
                     }
                 }
-
                 ?>
                 <img class="img-thumbnail picture" src="public/images/questionmark.jpg" alt="Profile picture">
 
@@ -87,10 +94,15 @@ $message = (isset($data['message'])) ? $data['message'] : "";
                             <input type="hidden" name="id" value="<?php echo $streamer->getIdStreamer(); ?>">
                             <button class="btn btn-primary" name="pridaj">Manazment</button>
                         </form>
-                        <form method="post" action="?c=store&a=addpoints&id=<?php echo $streamer->getIdStreamer(); ?>" style="padding: 5px;">
+                        <form method="post" action="?c=store&a=addpoints" style="padding: 5px;">
+                            <input type="hidden" name="id" value="<?php echo $streamer->getIdStreamer(); ?>">
                             <input type="text" style="margin: 5px;" class="form-control" name="komu" placeholder="Komu pridat body">
                             <input type="number" style="margin: 5px;" class="form-control" name="kolko" placeholder="Kolko bodov pridat">
                             <button class="btn btn-primary" name="body">Pridaj body</button>
+                        </form>
+                        <form method="post" action="?c=management&a=points" style="padding: 5px;">
+                            <input type="hidden" name="id" value="<?php echo $streamer->getIdStreamer(); ?>">
+                            <button class="btn btn-primary" name="body">Zobraz body</button>
                         </form>
                     </div>
                 <?php } ?>
@@ -108,14 +120,15 @@ $message = (isset($data['message'])) ? $data['message'] : "";
                                     <div class="card">
                                         <img src="public/images/questionmark.jpg" class="card-img-top img-karta" alt="">
                                         <div class="card-body row">
-                                            <h5 class="card-title titulok"><?php echo $product->getTitul(); if ($product->getHidden()) { ?><h6>(hidden)</h6> <?php } ?></h5>
+                                            <h5 class="card-title titulok"><?php echo $product->getTitul();?></h5>
+                                            <?php if ($product->getHidden()) { ?> <h6>(hidden)</h6> <?php } ?>
                                             <p class="card-text text-start card-text-custom"><?php echo $product->getPopis(); ?></p>
                                             <p class="card-text text-start"><i class="fa-solid fa-coins"> <?php echo $product->getCena(); ?> </i></p>
                                             <p class="card-text text-start"><i class="fa-solid fa-cart-flatbed"> <?php echo $product->getPocet(); ?></i></p>
                                             <br>
                                             <?php if ($auth->isLogged()) { ?>
                                                 <form>
-                                                    <a class="btn btn-primary">Zakupit</a>
+                                                    <a href="?c=store&a=buy&id=<?php echo $product->getIdProduct()."&idS=".$streamer->getIdStreamer(); ?>" class="btn btn-primary">Zakupit</a>
                                                     <?php if ($manage || $owner) { ?>
                                                         <a href="?c=store&a=editproduct&id=<?php echo $product->getIdProduct()."&idS=".$streamer->getIdStreamer(); ?>" class="btn btn-warning">Upravit</a>
                                                         <a href="?c=store&a=delete&id=<?php echo $product->getIdProduct()."&idS=".$streamer->getIdStreamer(); ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">Vymazat</a>

@@ -46,9 +46,11 @@ class AuthController extends AControllerBase
     {
         $formData = $this->app->getRequest()->getPost();
 
-        if (isset($formData['submit'])) {
+        if (isset($formData['submit-reg'])) {
 
-            $this->checkInput($formData);
+            if ($data = $this->checkInput($formData)) {
+                return $this->html($data);
+            }
 
             $hashPwd = password_hash($formData['password'], PASSWORD_DEFAULT);
 
@@ -105,7 +107,7 @@ class AuthController extends AControllerBase
             ];
             return $data;
         }
-        if (!$this->nicknameTaken($array['nickname'], $array['email'])) {
+        if ($this->nicknameTaken($array['nickname'], $array['email'])) {
             $data = ['message' => 'Meno alebo email už sú obsadené!'];
             return $data;
         }

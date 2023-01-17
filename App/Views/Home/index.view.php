@@ -6,12 +6,13 @@ use App\Models\Streamer;
 
 <div class="row">
     <div class="container-fluid">
-        <div class="text-white" style="margin: 5em 0em;">
+        <div class="text-white" style="margin: 5em 0;">
             <h1 class="text-center">Odmeňte svojich divákov!</h1>
             <h2 class="text-center">Engage, earn and spend</h2>
         </div>
     </div>
 </div>
+<?php if ($data) { ?>
 <div class="row">
     <div class="bg-white text-black col col-xl-12 text-center main-karty">
         <br>
@@ -34,5 +35,6 @@ use App\Models\Streamer;
         </div>
     </div>
 </div>
+<?php } ?>
 
 

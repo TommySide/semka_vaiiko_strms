@@ -13,6 +13,16 @@ class Points extends Model
         return 'id';
     }
 
+    static public function getDbColumns() : array
+    {
+        return [ 'id' ,'points', 'id_user', 'id_streamer' ];
+    }
+
+    static public function setTableName()
+    {
+        return "points";
+    }
+
     /**
      * @return mixed
      */
@@ -32,7 +42,7 @@ class Points extends Model
     /**
      * @return mixed
      */
-    public function getPoints()
+    public function getPoints(): int
     {
         return $this->points;
     }
@@ -54,9 +64,9 @@ class Points extends Model
     }
 
     /**
-     * @param mixed $id_user
+     * @param int $id_user
      */
-    public function setIdUser($id_user): void
+    public function setIdUser(int $id_user): void
     {
         $this->id_user = $id_user;
     }
